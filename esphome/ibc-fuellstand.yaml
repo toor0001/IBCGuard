@@ -16,7 +16,18 @@ esphome:
         - binary_sensor.template.publish:
             id: measurement_valid
             state: OFF
+
         - script.execute: awake_failsafe
+
+        - delay: 1s
+
+        - if:
+            condition:
+              binary_sensor.is_on: maintenance_mode
+            then:
+              - logger.log: "Boot: Wartungsmodus EIN"
+            else:
+              - logger.log: "Boot: Wartungsmodus AUS"
 
 esp32:
   board: lolin32_lite
@@ -198,7 +209,10 @@ script:
           condition:
             binary_sensor.is_off: maintenance_mode
           then:
+            - logger.log: "Gehe schlafen: Wartungsmodus AUS"
             - deep_sleep.enter: deep_sleep_control
+          else:
+            - logger.log: "Bleibe wach: Wartungsmodus EIN"
 
   - id: awake_failsafe
     mode: single
@@ -208,5 +222,8 @@ script:
           condition:
             binary_sensor.is_off: maintenance_mode
           then:
-            - logger.log: "45-s-Failsafe: gehe trotz fehlender Übertragung schlafen."
+            - logger.log: "45-s-Failsafe: Wartungsmodus AUS, gehe schlafen."
             - deep_sleep.enter: deep_sleep_control
+          else:
+            - logger.log: "45-s-Failsafe: Wartungsmodus EIN, bleibe wach."
+
