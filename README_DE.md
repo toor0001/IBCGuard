@@ -88,6 +88,8 @@ Einige der oben genannten Links sind Amazon-Partnerlinks. Für dich entstehen da
 
 ## Verdrahtung
 
+![IBCLEVEL-Verdrahtungsplan](fritzing/IBCLEVEL_wiring_clean_Steckplatine.jpg)
+
 ### VL53L0X → LOLIN32 Lite
 
 | VL53L0X | LOLIN32 Lite |
@@ -120,7 +122,7 @@ LOLIN32 Lite GND-+
                  +---- Wartungsschalter
 ```
 
-Ein Fritzing-Projekt und ein exportierter Verdrahtungsplan sind für den Ordner [`fritzing`](fritzing/) vorgesehen.
+Die Fritzing-Dateien und der exportierte Verdrahtungsplan befinden sich im Ordner [`fritzing`](fritzing/).
 
 ## ESPHome
 
