@@ -49,7 +49,8 @@ The ESP32 is intended to run from a battery. In normal operation it wakes up, ta
 | 3.7 V LiPo / Li-Ion battery | Power supply; select a suitable battery for your build and verify connector polarity before use | — |
 | Slide switch | Physical maintenance / no-sleep mode | [Amazon.de](https://link.amazon/B07UrAODV) |
 | Micro-USB extension / panel adapter | External charging, programming and USB access | [Amazon.de](https://link.amazon/B010nKBUo) |
-| Heat-set inserts + screws | Internal PCB mounting | — |
+| Heat-set threaded inserts | Threaded mounting points in the 3D-printed enclosure | [Amazon.de](https://link.amazon/B04F2Wwbw) |
+| Screws | Mounting the electronics and enclosure components | [Amazon.de](https://link.amazon/B0b1rHkyN) |
 | 3D printed enclosure | Mounting on the IBC | [3D files](3d/) |
 
 ### Affiliate disclosure
