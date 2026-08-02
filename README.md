@@ -54,6 +54,10 @@ The ESP32 is intended to run from a battery. In normal operation it wakes up, ta
 | Screws | Mounting the electronics and enclosure components | [Amazon.de](https://link.amazon/B0b1rHkyN) |
 | 3D printed enclosure | Mounting on the IBC | [3D files](3d/) |
 
+### Battery option
+
+A suitable **3.7 V 18650 Li-Ion cell can also be reused from an old or inexpensive mini power bank**, provided it is a standard single-cell 18650 and is in good condition. This can be a convenient source for a cell you may already have available. Only reuse cells that are undamaged and do not show swelling, corrosion, overheating or other signs of deterioration. Verify the cell voltage and condition before use.
+
 ### ⚠️ Important: battery connector polarity
 
 **Do not connect the battery until you have verified the polarity.** The 2-pin battery connector on the LOLIN32 Lite may be wired opposite to commonly sold pre-wired JST-PH leads. On the board used for this project, the **`+` terminal is marked directly on the PCB next to the battery socket**; with the standard pre-wired connector used here, that position would otherwise be connected to the **black/negative wire**.
