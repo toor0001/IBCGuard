@@ -44,14 +44,21 @@ The ESP32 is intended to run from a battery. In normal operation it wakes up, ta
 
 | Component | Purpose | Link |
 |---|---|---|
-| LOLIN32 Lite | ESP32 controller with LiPo support | [Amazon.de](https://link.amazon/B08XCjKmW) |
+| LOLIN32 Lite | ESP32 controller with battery support | [Amazon.de](https://link.amazon/B08XCjKmW) |
 | VL53L0X Time-of-Flight sensor | Contactless distance measurement | [Amazon.de](https://link.amazon/B0c7CzOGX) |
-| 3.7 V LiPo / Li-Ion battery | Power supply; select a suitable battery for your build and verify connector polarity before use | — |
+| 18650 battery holder | Holder for a replaceable 3.7 V 18650 Li-Ion cell | [Amazon.de](https://link.amazon/B01DdEQ1R) |
+| JST-PH 2-pin connector / cable | Connection between the battery holder and LOLIN32 Lite; **polarity must be checked before connecting** | [Amazon.de](https://link.amazon/B0gWDZhb8) |
 | Slide switch | Physical maintenance / no-sleep mode | [Amazon.de](https://link.amazon/B07UrAODV) |
 | Micro-USB extension / panel adapter | External charging, programming and USB access | [Amazon.de](https://link.amazon/B010nKBUo) |
 | Heat-set threaded inserts | Threaded mounting points in the 3D-printed enclosure | [Amazon.de](https://link.amazon/B04F2Wwbw) |
 | Screws | Mounting the electronics and enclosure components | [Amazon.de](https://link.amazon/B0b1rHkyN) |
 | 3D printed enclosure | Mounting on the IBC | [3D files](3d/) |
+
+### ⚠️ Important: battery connector polarity
+
+**Do not connect the battery until you have verified the polarity.** The 2-pin battery connector on the LOLIN32 Lite may be wired opposite to commonly sold pre-wired JST-PH leads. On the board used for this project, the **`+` terminal is marked directly on the PCB next to the battery socket**; with the standard pre-wired connector used here, that position would otherwise be connected to the **black/negative wire**.
+
+Before plugging the connector into the LOLIN32 Lite, compare the wire positions with the `+` marking on your actual board and, if necessary, swap the contacts in the connector housing or wire the battery holder accordingly. **Never rely on wire color or connector orientation alone. Reversed battery polarity can damage the board.**
 
 ### Affiliate disclosure
 
@@ -208,7 +215,7 @@ If this project is useful to you and you would like to support further developme
 
 This is a DIY project. Protect the electronics appropriately against rain, condensation and other environmental conditions. A 3D-printed enclosure is not automatically waterproof.
 
-LiPo batteries require suitable charging, handling and temperature precautions. Do not use damaged batteries.
+Li-Ion batteries require suitable charging, handling and temperature precautions. Do not use damaged batteries, and always verify battery polarity before connecting them to the board.
 
 ## Contributing
 
