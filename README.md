@@ -1,5 +1,7 @@
 # IBC Rainwater Tank Level Sensor
 
+🌐 **Language:** **English** | [Deutsch](README_DE.md)
+
 [![ESPHome](https://img.shields.io/badge/ESPHome-ESP32-blue)](https://esphome.io/)
 [![Home Assistant](https://img.shields.io/badge/Home%20Assistant-compatible-blue)](https://www.home-assistant.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
