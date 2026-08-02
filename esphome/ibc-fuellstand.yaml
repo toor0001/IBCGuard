@@ -1,0 +1,200 @@
+substitutions:
+  device_name: ibc-fuellstand
+  friendly_name: "IBC Füllstand"
+  tank_capacity_l: "1000"
+  distance_empty_cm: "100"
+  distance_full_cm: "10"
+  sleep_time: "15min"
+
+esphome:
+  name: ${device_name}
+  friendly_name: ${friendly_name}
+  comment: "Batteriebetriebener Füllstandssensor für einen 1000-Liter-IBC"
+  on_boot:
+    - priority: -100
+      then:
+        - binary_sensor.template.publish:
+            id: measurement_valid
+            state: OFF
+        - script.execute: awake_failsafe
+
+esp32:
+  board: lolin32_lite
+  framework:
+    type: arduino
+
+logger:
+  level: INFO
+
+api:
+  id: native_api
+  encryption:
+    key: !secret api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  reboot_timeout: 0s
+
+i2c:
+  sda: GPIO16
+  scl: GPIO17
+  scan: false
+  frequency: 100kHz
+
+deep_sleep:
+  id: deep_sleep_control
+  sleep_duration: ${sleep_time}
+
+binary_sensor:
+  - platform: gpio
+    name: "IBC Wartungsmodus"
+    id: maintenance_mode
+    pin:
+      number: GPIO13
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    entity_category: diagnostic
+
+  - platform: template
+    name: "Letzte Entfernungsmessung gültig"
+    id: measurement_valid
+    entity_category: diagnostic
+    lambda: return {};
+
+sensor:
+  - platform: vl53l0x
+    name: "IBC Abstand"
+    id: ibc_distance
+    address: 0x29
+    update_interval: 500ms
+    long_range: true
+    timing_budget: 100ms
+    unit_of_measurement: cm
+    accuracy_decimals: 1
+    device_class: distance
+    state_class: measurement
+    filters:
+      - lambda: |-
+          if (isnan(x)) {
+            return {};
+          }
+          return x;
+      - median:
+          window_size: 11
+          send_every: 11
+          send_first_at: 11
+      - multiply: 100.0
+    on_value:
+      then:
+        - sensor.template.publish:
+            id: ibc_fill_percent
+            state: !lambda |-
+              const float empty_cm = ${distance_empty_cm};
+              const float full_cm = ${distance_full_cm};
+              if (!isfinite(x) || empty_cm <= full_cm) return NAN;
+              float percent = 100.0f * (empty_cm - x) / (empty_cm - full_cm);
+              return std::max(0.0f, std::min(100.0f, percent));
+        - sensor.template.publish:
+            id: ibc_water_liters
+            state: !lambda |-
+              const float empty_cm = ${distance_empty_cm};
+              const float full_cm = ${distance_full_cm};
+              if (!isfinite(x) || empty_cm <= full_cm) return NAN;
+              float percent = 100.0f * (empty_cm - x) / (empty_cm - full_cm);
+              percent = std::max(0.0f, std::min(100.0f, percent));
+              return percent * ${tank_capacity_l} / 100.0f;
+        - binary_sensor.template.publish:
+            id: measurement_valid
+            state: ON
+        - script.execute: finish_cycle
+
+  - platform: template
+    name: "IBC Füllstand"
+    id: ibc_fill_percent
+    unit_of_measurement: "%"
+    accuracy_decimals: 1
+    icon: mdi:water-percent
+    state_class: measurement
+    update_interval: never
+
+  - platform: template
+    name: "IBC Wassermenge"
+    id: ibc_water_liters
+    unit_of_measurement: L
+    accuracy_decimals: 0
+    device_class: volume_storage
+    state_class: measurement
+    update_interval: never
+
+  - platform: wifi_signal
+    name: "IBC WLAN-Signal"
+    id: ibc_wifi_signal
+    update_interval: 2s
+    entity_category: diagnostic
+
+  - platform: template
+    name: "IBC Uptime aktiv"
+    id: ibc_active_uptime
+    unit_of_measurement: s
+    accuracy_decimals: 1
+    device_class: duration
+    state_class: measurement
+    entity_category: diagnostic
+    update_interval: never
+
+text_sensor:
+  - platform: version
+    name: "ESPHome-Version"
+    entity_category: diagnostic
+
+script:
+  - id: finish_cycle
+    mode: single
+    then:
+      - wait_until:
+          condition:
+            api.connected:
+              state_subscription_only: true
+          timeout: 20s
+      - if:
+          condition:
+            api.connected:
+              state_subscription_only: true
+          then:
+            - sensor.template.publish:
+                id: ibc_active_uptime
+                state: !lambda return millis() / 1000.0f;
+            - delay: 1500ms
+          else:
+            - logger.log: "Kein abonnierender API-Client; Failsafe-Schlaf folgt."
+      - if:
+          condition:
+            binary_sensor.is_off: maintenance_mode
+          then:
+            - deep_sleep.enter: deep_sleep_control
+
+  - id: awake_failsafe
+    mode: single
+    then:
+      - delay: 45s
+      - if:
+          condition:
+            binary_sensor.is_off: maintenance_mode
+          then:
+            - logger.log: "45-s-Failsafe: gehe trotz fehlender Übertragung schlafen."
+            - deep_sleep.enter: deep_sleep_control
+
+# First commissioning:
+# 1. Put the physical maintenance switch into MAINTENANCE mode (GPIO13 -> GND).
+#    This keeps the ESP32 awake, so deep sleep does not need to be commented out.
+# 2. Temporarily set i2c.scan to true.
+# 3. Verify that the VL53L0X is detected at 0x29 and that readings are stable.
+# 4. Calibrate the full/empty distances in the final installation position.
+# 5. Set i2c.scan back to false and switch to NORMAL mode for deep-sleep operation.
