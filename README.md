@@ -44,17 +44,17 @@ The ESP32 is intended to run from a battery. In normal operation it wakes up, ta
 
 | Component | Purpose | Link |
 |---|---|---|
-| LOLIN32 Lite | ESP32 controller with LiPo support | Amazon affiliate link – coming soon |
-| VL53L0X ToF module | Contactless distance measurement | Amazon affiliate link – coming soon |
-| LiPo battery | Power supply | Amazon affiliate link – coming soon |
-| Slide switch | Physical maintenance / no-sleep mode | Amazon affiliate link – coming soon |
-| USB extension / panel adapter | External charging and USB access | Amazon affiliate link – coming soon |
-| Heat-set inserts + screws | Internal PCB mounting | Amazon affiliate link – coming soon |
+| LOLIN32 Lite | ESP32 controller with LiPo support | [Amazon.de](https://link.amazon/B08XCjKmW) |
+| VL53L0X Time-of-Flight sensor | Contactless distance measurement | [Amazon.de](https://link.amazon/B0c7CzOGX) |
+| 3.7 V LiPo / Li-Ion battery | Power supply; select a suitable battery for your build and verify connector polarity before use | — |
+| Slide switch | Physical maintenance / no-sleep mode | [Amazon.de](https://link.amazon/B07UrAODV) |
+| Micro-USB extension / panel adapter | External charging, programming and USB access | [Amazon.de](https://link.amazon/B010nKBUo) |
+| Heat-set inserts + screws | Internal PCB mounting | — |
 | 3D printed enclosure | Mounting on the IBC | [3D files](3d/) |
 
 ### Affiliate disclosure
 
-Some hardware links in this project may be Amazon affiliate links. If you purchase something through one of these links, I may receive a small commission at no additional cost to you. This helps support further development and documentation of the project.
+Some links above are Amazon affiliate links. As an Amazon Associate I earn from qualifying purchases, at no additional cost to you.
 
 **Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.**
 
