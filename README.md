@@ -6,14 +6,17 @@
 
 A battery-powered, contactless level sensor for a **1,000 L IBC rainwater tank**, based on a **LOLIN32 Lite (ESP32)**, **VL53L0X Time-of-Flight sensor**, ESPHome and Home Assistant.
 
-> **Project status:** Work in progress. The electronics and ESPHome configuration are working; final IBC calibration and enclosure verification are still in progress.
+> **Project status:** Work in progress. The electronics, ESPHome configuration and current enclosure prototype are available; final IBC calibration and long-term testing are still in progress.
+
+![Current enclosure prototype](images/enclosure-preview.png)
 
 ## Quick links
 
 - [ESPHome configuration](esphome/ibc-fuellstand.yaml)
 - [Example secrets file](esphome/secrets.example.yaml)
+- [3D-print files](3d/)
+- [Wiring / Fritzing section](fritzing/)
 - [License](LICENSE)
-- 3D-print files — coming soon
 
 ## Why this project?
 
@@ -35,7 +38,7 @@ The ESP32 is intended to run from a battery. In normal operation it wakes up, ta
 - Physical maintenance switch
 - OTA updates in maintenance mode
 - Wi-Fi and diagnostic entities
-- Custom 3D-printable enclosure in development
+- Custom 3D-printable enclosure
 
 ## Hardware
 
@@ -47,7 +50,7 @@ The ESP32 is intended to run from a battery. In normal operation it wakes up, ta
 | Slide switch | Physical maintenance / no-sleep mode | Amazon affiliate link – coming soon |
 | USB extension / panel adapter | External charging and USB access | Amazon affiliate link – coming soon |
 | Heat-set inserts + screws | Internal PCB mounting | Amazon affiliate link – coming soon |
-| 3D printed enclosure | Mounting on the IBC | STL files – coming soon |
+| 3D printed enclosure | Mounting on the IBC | [3D files](3d/) |
 
 ### Affiliate disclosure
 
@@ -78,6 +81,8 @@ GPIO13 uses the internal pull-up resistor.
 - **Switch closed:** maintenance mode / ESP32 stays awake
 
 The sensor and maintenance switch can share the same GND connection.
+
+A Fritzing project and exported wiring diagram are planned in the [`fritzing`](fritzing/) directory.
 
 ## ESPHome
 
@@ -135,6 +140,12 @@ Home Assistant should normally discover the device automatically through the ESP
 
 Because the device sleeps between measurement cycles, it is normal for the ESPHome API to be unavailable while the ESP32 is asleep. Home Assistant retains the last reported sensor values.
 
+### Example device view
+
+The screenshot below shows the current ESPHome device in Home Assistant, including the calculated fill level and water volume as well as diagnostic values.
+
+![IBC level sensor in Home Assistant](images/home-assistant-device.png)
+
 ## First commissioning
 
 For the first test, close the maintenance switch so GPIO13 is connected to GND. The ESP32 will remain awake. Temporarily enable I²C scanning:
@@ -150,9 +161,18 @@ The VL53L0X should normally appear at address **0x29**. Once the sensor, Home As
 
 ## 3D printed enclosure
 
-The enclosure is currently being refined around the final hardware. It includes a removable lid, internal heat-set-insert mounting points, battery holder, external USB access and a physical maintenance switch. The VL53L0X is mounted in the lid and measures downward into the tank.
+A custom enclosure was designed for the project and is being test-fitted with the real hardware. The current design provides space for the LOLIN32 Lite, battery, external USB connection and physical maintenance switch. The VL53L0X is mounted in the lid and measures downward into the IBC.
 
-STL files will be published after the final dimensions have been verified on the real hardware.
+The enclosure has been prepared and test-printed using a **Bambu Lab A1 mini**. The current slicer preview is shown at the top of this README.
+
+### Available files
+
+- **Base:** [`3d/IBCLEVEL_BASE_v38.stl`](3d/IBCLEVEL_BASE_v38.stl)
+- **Lid:** [`3d/IBCLEVEL_LID_v26.zip`](3d/IBCLEVEL_LID_v26.zip) — extract the STL before importing it into your slicer.
+
+The lid is provided as a ZIP archive because the original high-resolution STL exceeds GitHub's normal browser upload size limit. The archive contains the unmodified STL geometry.
+
+The enclosure is still considered a prototype until final fit and outdoor testing have been completed. Check dimensions and fit before committing to a final print.
 
 ## Power consumption
 
@@ -174,12 +194,14 @@ If this project is useful to you and you would like to support further developme
 - [x] Deep-sleep logic
 - [x] Publish ESPHome YAML
 - [x] Publish example secrets file
+- [x] Publish current STL files
+- [x] Add enclosure preview
+- [x] Add Home Assistant screenshot
 - [ ] Final IBC calibration
 - [ ] Final enclosure verification
-- [ ] Publish STL files
 - [ ] Battery runtime testing
 - [ ] Add build photographs
-- [ ] Add wiring diagram
+- [ ] Add Fritzing wiring diagram
 
 ## Safety and outdoor use
 
@@ -193,7 +215,7 @@ Issues, suggestions and improvements are welcome. Feedback from builds using dif
 
 ## License
 
-Source code and documentation are released under the [MIT License](LICENSE), unless otherwise noted. 3D models may receive a separate license when the final files are published.
+Source code and documentation are released under the [MIT License](LICENSE), unless otherwise noted. 3D models may receive a separate license in a future revision.
 
 ---
 
