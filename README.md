@@ -8,7 +8,7 @@ A battery-powered, contactless level sensor for a **1,000 L IBC rainwater tank**
 
 > **Project status:** Work in progress. The electronics, ESPHome configuration and current enclosure prototype are available; final IBC calibration and long-term testing are still in progress.
 
-![Current enclosure prototype](images/enclosure-preview.png)
+![Current enclosure prototype](images/enclosure-preview.png.png)
 
 ## Quick links
 
