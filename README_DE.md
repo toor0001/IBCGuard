@@ -10,7 +10,10 @@ Ein batteriebetriebener, berührungsloser Füllstandssensor für einen **1.000-L
 
 > **Projektstatus:** In Entwicklung. Elektronik, ESPHome-Konfiguration und der aktuelle Gehäuse-Prototyp sind verfügbar; die endgültige IBC-Kalibrierung und Langzeittests stehen noch aus.
 
-![Aktueller Gehäuse-Prototyp](images/enclosure-preview.png.png)
+<p align="center">
+  <img src="images/ibc1.jpg" alt="Fertiges IBCLEVEL-Gehäuse" width="48%">
+  <img src="images/ibc2.jpg" alt="Innenansicht des IBCLEVEL-Gehäuses" width="48%">
+</p>
 
 ## Schnellzugriff
 
@@ -55,6 +58,17 @@ Der ESP32 ist für Batteriebetrieb ausgelegt. Im normalen Betrieb wacht er auf, 
 | Gewindeeinsätze zum Einschmelzen | Gewindepunkte im 3D-gedruckten Gehäuse | [Amazon.de](https://link.amazon/B04F2Wwbw) |
 | Schrauben | Befestigung von Elektronik und Gehäuseteilen | [Amazon.de](https://link.amazon/B0b1rHkyN) |
 | 3D-gedrucktes Gehäuse | Montage am IBC | [3D-Dateien](3d/) |
+
+### Gewindeeinsätze zum Einschmelzen
+
+Das aktuelle Gehäuse verwendet zwei Größen aus dem gezeigten Heat-Set-Insert-Sortiment:
+
+- **Elektronik / kleine Befestigungspunkte:** M2 × 3 × 3,2 mm.
+- **Befestigung des Deckels an der Basis:** M3 × 5 × 5 mm.
+
+Als praktischer Ausgangspunkt für die gedruckten Aufnahmebohrungen eignen sich ungefähr **Ø 3,0 mm × 3,5 mm tief für M2** und **Ø 4,6–4,7 mm × 5,5 mm tief für M3**. Die optimale Passung hängt von Filament, Druckerkalibrierung und der tatsächlichen Geometrie der Einsätze ab. Deshalb empfiehlt sich vor dem endgültigen Druck ein kleines Teststück.
+
+Für PLA/PETG ist ein Bereich von etwa **200–220 °C** ein sinnvoller Ausgangspunkt; **210 °C** eignet sich für diesen Aufbau als Startwert. Den Einsatz mit Lötkolben bzw. Heat-Set-Spitze langsam und gerade einschmelzen und nicht mit Gewalt hineindrücken. Vor dem Einschrauben vollständig abkühlen lassen.
 
 ### Akku-Option
 
@@ -313,7 +327,9 @@ Der VL53L0X sollte normalerweise unter **0x29** erscheinen. Wenn Sensor, Home-As
 
 Für das Projekt wurde ein eigenes Gehäuse konstruiert und mit der realen Hardware getestet. Es bietet Platz für LOLIN32 Lite, Akku, externen USB-Anschluss und Wartungsschalter. Der VL53L0X sitzt im Deckel und misst nach unten in den IBC.
 
-Das Gehäuse wurde mit einem **Bambu Lab A1 mini** vorbereitet und testweise gedruckt. Die aktuelle Slicer-Vorschau ist oben in dieser README zu sehen.
+Das Gehäuse wurde mit einem **Bambu Lab A1 mini** vorbereitet und testweise gedruckt.
+
+![Aktuelle Gehäuse-/Slicer-Vorschau](images/enclosure-preview.png.png)
 
 ### Verfügbare Dateien
 
