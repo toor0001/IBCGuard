@@ -327,7 +327,7 @@ Der VL53L0X sollte normalerweise unter **0x29** erscheinen. Wenn Sensor, Home-As
 
 Für das Projekt wurde ein eigenes Gehäuse konstruiert und mit der realen Hardware getestet. Es bietet Platz für LOLIN32 Lite, Akku, externen USB-Anschluss und Wartungsschalter. Der VL53L0X sitzt im Deckel und misst nach unten in den IBC.
 
-Das Gehäuse wurde mit einem **Bambu Lab A1 mini** vorbereitet und testweise gedruckt.
+Das Gehäuse wurde mit einem **Bambu Lab A1 mini** gedruckt.
 
 ![Aktuelle Gehäuse-/Slicer-Vorschau](images/enclosure-preview.png.png)
 
@@ -342,7 +342,7 @@ Das Gehäuse gilt bis zum Abschluss der endgültigen Passform- und Außentests w
 
 ## Stromverbrauch
 
-Ein niedriger Stromverbrauch ist ein wichtiges Ziel. Die tatsächliche Akkulaufzeit hängt unter anderem von Akkukapazität, WLAN-Signal, Verbindungsdauer, Messdauer, Schlafintervall und Ruhestrom der gesamten Elektronik ab. Reale Laufzeitdaten werden nach den Langzeittests ergänzt.
+Ein niedriger Stromverbrauch ist ein wichtiges Ziel. Die tatsächliche Akkulaufzeit hängt unter anderem von Akkukapazität, WLAN-Signal, Verbindungsdauer, Messdauer, Schlafintervall und Ruhestrom der gesamten Elektronik ab. 
 
 ## Projekt unterstützen
 
