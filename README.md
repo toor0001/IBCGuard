@@ -330,9 +330,11 @@ Low power consumption is a primary goal. Actual battery runtime depends on batte
 
 ## Support the project
 
-If this project is useful to you and you would like to support further development and documentation, a PayPal support link will be added here.
+IBCLEVEL is an open-source hobby project. If you find it useful and would like to support further development, testing and documentation, you can send a voluntary contribution via PayPal.
 
-**PayPal:** coming soon
+[![Support via PayPal](https://img.shields.io/badge/Support-PayPal-0070BA?logo=paypal)](https://paypal.me/toor0001)
+
+Support is completely optional. This is a voluntary contribution and is not presented as a tax-deductible donation.
 
 ## Roadmap
 
