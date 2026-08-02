@@ -332,7 +332,9 @@ Low power consumption is a primary goal. Actual battery runtime depends on batte
 
 IBCLEVEL is an open-source hobby project. If you find it useful and would like to support further development, testing and documentation, you can send a voluntary contribution via PayPal.
 
-[![Support via PayPal](images/support.png)](https://paypal.me/toor0001)
+<a href="https://paypal.me/toor0001">
+  <img src="images/support.png" alt="Support this project" width="300">
+</a>
 
 Support is completely optional. This is a voluntary contribution and is not presented as a tax-deductible donation.
 
