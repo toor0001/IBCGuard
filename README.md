@@ -92,7 +92,17 @@ GPIO13 uses the internal pull-up resistor.
 - **Switch open:** normal operation / deep sleep enabled
 - **Switch closed:** maintenance mode / ESP32 stays awake
 
-The sensor and maintenance switch can share the same GND connection.
+### Shared GND connection
+
+The LOLIN32 Lite used for this project provides only **one convenient GND pin**, while both the VL53L0X sensor and the maintenance switch need a ground connection. Both must therefore share the same GND.
+
+A simple solution is to make a small **Y-splitter cable** from the LOLIN32 Lite GND pin to the two ground wires. Alternatively, the GND wire from the sensor and the GND wire from the switch can be joined/soldered together and connected to the single GND pin. Insulate the joint properly, for example with heat-shrink tubing, and make sure the connection is mechanically secure.
+
+```text
+                 +---- VL53L0X GND
+LOLIN32 Lite GND-+
+                 +---- maintenance switch
+```
 
 A Fritzing project and exported wiring diagram are planned in the [`fritzing`](fritzing/) directory.
 
