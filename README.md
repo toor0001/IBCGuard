@@ -88,6 +88,8 @@ Some links above are Amazon affiliate links. As an Amazon Associate I earn from 
 
 ## Wiring
 
+![IBCLEVEL wiring diagram](fritzing/IBCLEVEL_wiring_clean_Steckplatine.jpg)
+
 ### VL53L0X → LOLIN32 Lite
 
 | VL53L0X | LOLIN32 Lite |
@@ -120,7 +122,7 @@ LOLIN32 Lite GND-+
                  +---- maintenance switch
 ```
 
-A Fritzing project and exported wiring diagram are planned in the [`fritzing`](fritzing/) directory.
+The Fritzing files and exported wiring diagram are available in the [`fritzing`](fritzing/) directory.
 
 ## ESPHome
 
