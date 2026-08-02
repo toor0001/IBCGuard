@@ -332,28 +332,9 @@ Low power consumption is a primary goal. Actual battery runtime depends on batte
 
 IBCLEVEL is an open-source hobby project. If you find it useful and would like to support further development, testing and documentation, you can send a voluntary contribution via PayPal.
 
-[![Support via PayPal](https://img.shields.io/badge/Support-PayPal-0070BA?logo=paypal)](https://paypal.me/toor0001)
+[![Support via PayPal](images/support.png)](https://paypal.me/toor0001)
 
 Support is completely optional. This is a voluntary contribution and is not presented as a tax-deductible donation.
-
-## Roadmap
-
-- [x] ESP32 prototype
-- [x] VL53L0X distance measurement
-- [x] Median filtering
-- [x] Home Assistant integration
-- [x] Physical maintenance mode
-- [x] Deep-sleep logic
-- [x] Publish ESPHome YAML
-- [x] Publish example secrets file
-- [x] Publish current STL files
-- [x] Add enclosure preview
-- [x] Add Home Assistant screenshot
-- [ ] Final IBC calibration
-- [ ] Final enclosure verification
-- [ ] Battery runtime testing
-- [ ] Add build photographs
-- [ ] Add Fritzing wiring diagram
 
 ## Safety and outdoor use
 
