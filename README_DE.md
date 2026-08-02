@@ -11,8 +11,8 @@ Ein batteriebetriebener, berührungsloser Füllstandssensor für einen **1.000-L
 > **Projektstatus:** In Entwicklung. Elektronik, ESPHome-Konfiguration und der aktuelle Gehäuse-Prototyp sind verfügbar; die endgültige IBC-Kalibrierung und Langzeittests stehen noch aus.
 
 <p align="center">
-  <img src="images/ibc1.jpg" alt="Fertiges IBCLEVEL-Gehäuse" width="48%">
-  <img src="images/ibc2.jpg" alt="Innenansicht des IBCLEVEL-Gehäuses" width="48%">
+  <img src="images/ibc1.jpeg" alt="Fertiges IBCLEVEL-Gehäuse" width="48%">
+  <img src="images/ibc2.jpeg" alt="Innenansicht des IBCLEVEL-Gehäuses" width="48%">
 </p>
 
 ## Schnellzugriff
