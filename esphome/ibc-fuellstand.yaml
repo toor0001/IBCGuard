@@ -62,6 +62,16 @@ binary_sensor:
       inverted: true
     entity_category: diagnostic
 
+    on_press:
+      - logger.log:
+          level: INFO
+          format: "Wartungsmodus EIN - Deep Sleep gesperrt"
+
+    on_release:
+      - logger.log:
+          level: INFO
+          format: "Wartungsmodus AUS - Deep Sleep erlaubt"
+
   - platform: template
     name: "Letzte Entfernungsmessung gültig"
     id: measurement_valid
@@ -93,6 +103,11 @@ sensor:
       - multiply: 100.0
     on_value:
       then:
+        - logger.log:
+            level: INFO
+            format: "IBC Abstand: %.1f cm"
+            args: [ 'x' ]
+
         - sensor.template.publish:
             id: ibc_fill_percent
             state: !lambda |-
@@ -154,6 +169,11 @@ text_sensor:
     name: "ESPHome-Version"
     entity_category: diagnostic
 
+button:
+  - platform: restart
+    name: "IBC Neustart"
+    entity_category: diagnostic
+
 script:
   - id: finish_cycle
     mode: single
@@ -190,11 +210,3 @@ script:
           then:
             - logger.log: "45-s-Failsafe: gehe trotz fehlender Übertragung schlafen."
             - deep_sleep.enter: deep_sleep_control
-
-# First commissioning:
-# 1. Put the physical maintenance switch into MAINTENANCE mode (GPIO13 -> GND).
-#    This keeps the ESP32 awake, so deep sleep does not need to be commented out.
-# 2. Temporarily set i2c.scan to true.
-# 3. Verify that the VL53L0X is detected at 0x29 and that readings are stable.
-# 4. Calibrate the full/empty distances in the final installation position.
-# 5. Set i2c.scan back to false and switch to NORMAL mode for deep-sleep operation.
