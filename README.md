@@ -10,7 +10,10 @@ A battery-powered, contactless level sensor for a **1,000 L IBC rainwater tank**
 
 > **Project status:** Work in progress. The electronics, ESPHome configuration and current enclosure prototype are available; final IBC calibration and long-term testing are still in progress.
 
-![Current enclosure prototype](images/enclosure-preview.png.png)
+<p align="center">
+  <img src="images/ibc1.jpg" alt="Finished IBCLEVEL enclosure" width="48%">
+  <img src="images/ibc2.jpg" alt="IBCLEVEL enclosure interior" width="48%">
+</p>
 
 ## Quick links
 
@@ -55,6 +58,17 @@ The ESP32 is intended to run from a battery. In normal operation it wakes up, ta
 | Heat-set threaded inserts | Threaded mounting points in the 3D-printed enclosure | [Amazon.de](https://link.amazon/B04F2Wwbw) |
 | Screws | Mounting the electronics and enclosure components | [Amazon.de](https://link.amazon/B0b1rHkyN) |
 | 3D printed enclosure | Mounting on the IBC | [3D files](3d/) |
+
+### Heat-set inserts
+
+The current enclosure uses two insert sizes from the pictured assortment:
+
+- **Electronics / small mounting points:** M2 × 3 × 3.2 mm heat-set inserts.
+- **Lid-to-base mounting posts:** M3 × 5 × 5 mm heat-set inserts.
+
+As a practical starting point for the printed holes, use approximately **Ø 3.0 mm × 3.5 mm deep for M2** and **Ø 4.6–4.7 mm × 5.5 mm deep for M3**. Exact fit depends on filament, printer calibration and the actual insert geometry, so test on a small printed sample first.
+
+For PLA/PETG, a temperature around **200–220 °C** is a useful starting range; **210 °C** worked as a sensible starting point for this build. Press the insert in slowly and straight with a soldering iron/heat-set tip, without forcing it. Allow it to cool completely before installing the screw.
 
 ### Battery option
 
@@ -315,7 +329,9 @@ The VL53L0X should normally appear at address **0x29**. Once the sensor, Home As
 
 A custom enclosure was designed for the project and is being test-fitted with the real hardware. The current design provides space for the LOLIN32 Lite, battery, external USB connection and physical maintenance switch. The VL53L0X is mounted in the lid and measures downward into the IBC.
 
-The enclosure has been prepared and test-printed using a **Bambu Lab A1 mini**. The current slicer preview is shown at the top of this README.
+The enclosure has been prepared and test-printed using a **Bambu Lab A1 mini**.
+
+![Current enclosure / slicer preview](images/enclosure-preview.png.png)
 
 ### Available files
 
