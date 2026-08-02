@@ -129,6 +129,134 @@ i2c:
 
 The VL53L0X measures every **500 ms** while the ESP32 is awake. Eleven valid values are collected and the median is published, so in continuous maintenance mode a new filtered value is produced approximately every **5.5 seconds**.
 
+## Home Assistant & ESPHome setup
+
+The steps below assume a Home Assistant installation that supports add-ons, such as Home Assistant OS or Home Assistant Supervised.
+
+### 1. Install the ESPHome add-on
+
+In Home Assistant, open:
+
+**Settings → Add-ons → Add-on Store**
+
+Search for **ESPHome Device Builder**, install it, then start the add-on. Enabling **Start on boot** is recommended. You can also enable **Show in sidebar** for easier access.
+
+### 2. Create a new ESPHome device
+
+Open ESPHome Device Builder and select **New device**. Create a device for the sensor, for example:
+
+```text
+ibc-fuellstand
+```
+
+The exact automatically generated YAML is not important because it will be replaced with the project configuration.
+
+### 3. Add your secrets
+
+Open the ESPHome `secrets.yaml` file and add your Wi-Fi credentials plus an API encryption key and OTA password.
+
+Use [`esphome/secrets.example.yaml`](esphome/secrets.example.yaml) as a template:
+
+```yaml
+wifi_ssid: "YOUR_WIFI_NAME"
+wifi_password: "YOUR_WIFI_PASSWORD"
+api_encryption_key: "YOUR_API_ENCRYPTION_KEY"
+ota_password: "YOUR_OTA_PASSWORD"
+```
+
+Do **not** copy your real `secrets.yaml` into a public GitHub repository.
+
+### 4. Replace the generated YAML
+
+Open the configuration of the newly created ESPHome device and replace its contents with:
+
+**[esphome/ibc-fuellstand.yaml](esphome/ibc-fuellstand.yaml)**
+
+Before installing, check the substitutions at the top of the file and adjust them if necessary:
+
+```yaml
+substitutions:
+  device_name: ibc-fuellstand
+  friendly_name: "IBC Füllstand"
+  tank_capacity_l: "1000"
+  distance_empty_cm: "100"
+  distance_full_cm: "10"
+  sleep_time: "15min"
+```
+
+The full/empty distances are calibration values and should later be adjusted to your actual tank and installation height.
+
+### 5. Keep the device awake for first setup
+
+For the first installation and testing, put the physical maintenance switch in the **ON** position so that **GPIO13 is connected to GND**. This prevents the ESP32 from entering deep sleep while you are flashing, viewing logs or performing OTA updates.
+
+For the very first sensor check, you can also temporarily change:
+
+```yaml
+scan: false
+```
+
+to:
+
+```yaml
+scan: true
+```
+
+under the `i2c:` section. The VL53L0X should normally be detected at address **0x29**.
+
+### 6. Install the firmware on the LOLIN32 Lite
+
+For the first flash, connect the LOLIN32 Lite to the computer/Home Assistant host via USB. In ESPHome Device Builder select **Install** and choose the appropriate USB/serial installation method available in your setup.
+
+After the first successful flash, the device should connect to your Wi-Fi network. Future updates can normally be installed wirelessly using **OTA**, as long as the maintenance switch keeps the device awake.
+
+### 7. Add the ESPHome device to Home Assistant
+
+Once the ESP32 is online, Home Assistant will usually discover it automatically.
+
+Open:
+
+**Settings → Devices & services**
+
+Look for a newly discovered **ESPHome** device named **IBC Füllstand** and select **Configure / Add**.
+
+If it is not discovered automatically, add the **ESPHome** integration manually and enter the device hostname or IP address, for example:
+
+```text
+ibc-fuellstand.local
+```
+
+or the ESP32's local IP address. The native ESPHome API uses port **6053** by default.
+
+If Home Assistant asks for an encryption key, use the same `api_encryption_key` that you stored in `secrets.yaml`.
+
+### 8. Check the entities in Home Assistant
+
+After the integration has been added, Home Assistant should create the project entities automatically, including:
+
+- **IBC Abstand** — measured distance to the water surface
+- **IBC Füllstand** — calculated fill level in percent
+- **IBC Wassermenge** — estimated water volume in liters
+- **IBC WLAN-Signal** — Wi-Fi signal strength
+- **IBC Uptime aktiv** — awake time for the current measurement cycle
+- **IBC Wartungsmodus** — physical maintenance-switch state
+- **Letzte Entfernungsmessung gültig** — measurement diagnostic
+- **ESPHome-Version** — installed ESPHome firmware version
+
+You can now add **IBC Füllstand** and/or **IBC Wassermenge** to any Home Assistant dashboard like normal sensor entities.
+
+### 9. Return to normal deep-sleep operation
+
+Once everything is working:
+
+1. Set `scan: false` again if you enabled I²C scanning.
+2. Install the final YAML once more if needed.
+3. Open the maintenance switch so GPIO13 is no longer connected to GND.
+
+The ESP32 will then wake up, take its measurements, send the values to Home Assistant and return to deep sleep for the configured interval.
+
+While the ESP32 is sleeping, it is **normal for the ESPHome device to appear temporarily offline**. Home Assistant keeps displaying the last successfully received sensor values.
+
 ## Deep sleep
 
 Normal operation:
