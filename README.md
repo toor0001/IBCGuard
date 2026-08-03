@@ -27,6 +27,8 @@ A battery-powered, contactless level sensor for a **1,000 L IBC rainwater tank**
 
 It is difficult to tell from the outside how much rainwater remains in an IBC tank. The A02YYUW is mounted at the top and measures the distance to the water surface without touching the water. ESPHome converts this distance into a fill level in percent and an estimated volume in liters, then publishes the values to Home Assistant.
 
+The enclosure with the sensor is simply placed over the existing lid opening instead of the original IBC lid. This means no permanent modifications to the IBC itself are required.
+
 The ESP32 is battery powered. During normal operation it wakes up, powers the A02YYUW, collects multiple UART measurements, publishes the median result and returns to deep sleep. The ultrasonic sensor is fully powered down through a ready-made **Pololu Mini MOSFET Slide Switch LV #2810** while the ESP32 sleeps so it does not waste battery power.
 
 ## Features
