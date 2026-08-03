@@ -1,8 +1,6 @@
 # Wiring diagram
 
-The project now uses a **DFRobot A02YYUW** ultrasonic distance sensor instead of the VL53L0X.
-
-The A02YYUW is connected through UART and its supply is switched off during deep sleep to reduce battery drain.
+The project uses a **DFRobot A02YYUW** ultrasonic distance sensor. The sensor is connected through UART and its supply is switched off during deep sleep to reduce battery drain.
 
 ## Current connections
 
@@ -11,34 +9,35 @@ The A02YYUW is connected through UART and its supply is switched off during deep
 | A02YYUW TX | GPIO16 (ESP32 RX) |
 | A02YYUW RX | Leave unconnected / floating for processed output mode |
 | A02YYUW GND | GND |
-| A02YYUW VCC | Switched 3.3 V |
-| Sensor power control | GPIO17 |
+| A02YYUW VCC | Pololu 2810 VOUT |
+| Pololu 2810 VIN | 3.3 V |
+| Pololu 2810 GND | GND |
+| Pololu 2810 ON | GPIO17 |
 | Maintenance switch | GPIO13 ↔ GND |
 
-## Recommended sensor power switch
+## A02YYUW power switch
 
-Use a **P-channel MOSFET high-side switch**, for example an **AO3401A**, with a pull-up resistor on the gate so the sensor remains off while the ESP32 is in deep sleep.
+Use the **Pololu Mini MOSFET Slide Switch with Reverse Voltage Protection, LV (#2810)**.
+
+For automatic operation, leave the physical slide switch on the Pololu module in the **OFF** position. The LOLIN32 Lite then controls the module through its `ON` input.
 
 ```text
-LOLIN32 Lite 3.3 V ----+--------- Source  AO3401A
-                       |
-                      100k
-                       |
-GPIO17 ----------------+--------- Gate
-                                  Drain -------- A02YYUW VCC
-
-LOLIN32 Lite GND ------------------------------ A02YYUW GND
-A02YYUW TX ------------------------------------ GPIO16
-A02YYUW RX ------------------------------------ not connected
+LOLIN32 3.3 V -------- VIN   Pololu 2810
+LOLIN32 GND   -------- GND   Pololu 2810
+GPIO17        -------- ON    Pololu 2810
+Pololu VOUT   -------- VCC   A02YYUW
+A02YYUW GND   -------- GND
+A02YYUW TX    -------- GPIO16
+A02YYUW RX    -------- not connected
 ```
 
-With this circuit:
+With this wiring:
 
-- **GPIO17 LOW:** A02YYUW powered on
-- **GPIO17 HIGH:** A02YYUW powered off
-- **GPIO17 floating during deep sleep:** the 100 kΩ pull-up keeps the MOSFET off
+- **GPIO17 HIGH:** A02YYUW powered on
+- **GPIO17 LOW:** A02YYUW powered off
+- while the ESP32 is in deep sleep, the A02YYUW remains unpowered
 
-A ready-made low-voltage high-side MOSFET/load-switch PCB can also be used instead of the discrete AO3401A circuit. It must work from approximately 3.3 V and accept a 3.3 V logic control input.
+Product reference: [Pololu #2810](https://www.pololu.com/product/2810)
 
 ## Maintenance switch
 
