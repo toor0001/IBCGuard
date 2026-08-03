@@ -27,6 +27,8 @@ Ein batteriebetriebener, berührungsloser Füllstandssensor für einen **1.000-L
 
 Von außen lässt sich bei einem IBC nur schwer erkennen, wie viel Regenwasser noch vorhanden ist. Der A02YYUW wird oben montiert und misst berührungslos den Abstand zur Wasseroberfläche. ESPHome berechnet daraus den Füllstand in Prozent und eine geschätzte Wassermenge in Litern und überträgt die Werte an Home Assistant.
 
+Das Gehäuse mit dem Sensor wird einfach anstelle des originalen IBC-Deckels auf die vorhandene Deckelöffnung aufgelegt. Am IBC selbst sind dadurch keine dauerhaften Änderungen notwendig.
+
 Der ESP32 läuft im Batteriebetrieb. Im Normalbetrieb wacht er auf, schaltet den A02YYUW ein, sammelt mehrere UART-Messwerte, veröffentlicht den Median und geht anschließend wieder in Deep Sleep. Der Ultraschallsensor wird dabei über einen fertigen **Pololu Mini MOSFET Slide Switch LV #2810** vollständig abgeschaltet, damit er während des Deep Sleep keinen unnötigen Strom verbraucht.
 
 ## Funktionen
