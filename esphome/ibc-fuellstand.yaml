@@ -53,15 +53,14 @@ deep_sleep:
   id: deep_sleep_control
   sleep_duration: ${sleep_time}
 
-# The A02YYUW is powered through a P-channel AO3401A high-side switch.
-# GPIO17 LOW = sensor ON, GPIO17 HIGH/high-impedance = sensor OFF.
-# 'inverted: true' makes output.turn_on behave intuitively.
+# The A02YYUW is powered through a Pololu Mini MOSFET Slide Switch
+# with Reverse Voltage Protection, LV (#2810).
+# With the physical slide switch in OFF:
+# GPIO17 HIGH = sensor ON, GPIO17 LOW/floating = sensor OFF.
 output:
   - platform: gpio
     id: a02_power
-    pin:
-      number: ${a02_power_pin}
-      inverted: true
+    pin: ${a02_power_pin}
 
 uart:
   id: a02_uart
