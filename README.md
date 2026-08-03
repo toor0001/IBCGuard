@@ -201,13 +201,9 @@ A suitable 3.7 V 18650 Li-Ion cell can be used as long as it is in good conditio
 
 Protect the electronics and battery from rain, condensation and other environmental exposure. A 3D-printed enclosure is not automatically waterproof.
 
-## Support the project
+## Support
 
-IBCLEVEL is an open-source hobby project. If it helps you and you would like to support further development:
-
-<a href="https://paypal.me/toor0001">
-  <img src="images/support.png" alt="Support the project" width="300">
-</a>
+<a href="https://buymeacoffee.com/toor0001"><img src="https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=%E2%98%95&slug=toor0001&button_colour=FFDD00&font_colour=000000&font_family=Lato&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a coffee"></a>
 
 ## Contributing
 
