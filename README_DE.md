@@ -203,13 +203,9 @@ Eine geeignete 3,7-V-18650-Li-Ion-Zelle kann verwendet werden, sofern sie in gut
 
 Elektronik und Akku müssen vor Regen, Kondenswasser und anderen Umwelteinflüssen geschützt werden. Ein 3D-gedrucktes Gehäuse ist nicht automatisch wasserdicht.
 
-## Projekt unterstützen
+## Unterstützung
 
-IBCLEVEL ist ein Open-Source-Hobbyprojekt. Wenn dir das Projekt hilft und du die weitere Entwicklung unterstützen möchtest:
-
-<a href="https://paypal.me/toor0001">
-  <img src="images/support.png" alt="Projekt unterstützen" width="300">
-</a>
+<a href="https://buymeacoffee.com/toor0001"><img src="https://img.buymeacoffee.com/button-api/?text=Spendiere%20mir%20einen%20Kaffee&emoji=%E2%98%95&slug=toor0001&button_colour=FFDD00&font_colour=000000&font_family=Lato&outline_colour=000000&coffee_colour=ffffff" alt="Spendiere mir einen Kaffee"></a>
 
 ## Mitmachen
 
