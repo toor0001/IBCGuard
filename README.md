@@ -27,7 +27,7 @@ A battery-powered, contactless level sensor for a **1,000 L IBC rainwater tank**
 
 It is difficult to tell from the outside how much rainwater remains in an IBC tank. The A02YYUW is mounted at the top and measures the distance to the water surface without touching the water. ESPHome converts this distance into a fill level in percent and an estimated volume in liters, then publishes the values to Home Assistant.
 
-The ESP32 is battery powered. During normal operation it wakes up, powers the A02YYUW, collects multiple UART measurements, publishes the median result and returns to deep sleep. The ultrasonic sensor is fully powered down through a MOSFET while the ESP32 sleeps so it does not waste battery power.
+The ESP32 is battery powered. During normal operation it wakes up, powers the A02YYUW, collects multiple UART measurements, publishes the median result and returns to deep sleep. The ultrasonic sensor is fully powered down through a ready-made **Pololu Mini MOSFET Slide Switch LV #2810** while the ESP32 sleeps so it does not waste battery power.
 
 ## Features
 
@@ -38,7 +38,7 @@ The ESP32 is battery powered. During normal operation it wakes up, powers the A0
 - Fill level in **%** and estimated water volume in **liters**
 - Native ESPHome + Home Assistant integration
 - Battery-oriented deep-sleep operation
-- Hardware power switching for the A02YYUW
+- Hardware power switching for the A02YYUW using **Pololu 2810**
 - Physical maintenance switch
 - OTA updates in maintenance mode
 - Wi-Fi and diagnostic entities
@@ -49,8 +49,7 @@ The ESP32 is battery powered. During normal operation it wakes up, powers the A0
 |---|---|---|
 | LOLIN32 Lite | ESP32 controller with battery support | [Amazon.de](https://link.amazon/B08XCjKmW) |
 | DFRobot A02YYUW | Waterproof ultrasonic distance measurement | [Amazon.de](https://link.amazon/B0dWRfbC4) |
-| AO3401A P-channel MOSFET **or suitable high-side switch module** | Fully powers down the A02YYUW during deep sleep | – |
-| 100 kΩ resistor | Gate pull-up for the AO3401A | – |
+| **Pololu Mini MOSFET Slide Switch with Reverse Voltage Protection, LV #2810** | Fully powers down the A02YYUW during deep sleep | [Pololu](https://www.pololu.com/product/2810) |
 | 18650 battery holder | Holder for a replaceable 3.7 V 18650 Li-Ion cell | [Amazon.de](https://link.amazon/B01DdEQ1R) |
 | JST-PH 2-pin connector / cable | Connection between battery holder and LOLIN32 Lite; **check polarity before connecting** | [Amazon.de](https://link.amazon/B0gWDZhb8) |
 | Slide switch | Physical maintenance / no-sleep mode | [Amazon.de](https://link.amazon/B07UrAODV) |
@@ -71,39 +70,25 @@ The **A02YYUW RX pin is left unconnected**. This selects the processed/stable ou
 
 ## Wiring
 
-### A02YYUW → LOLIN32 Lite
+### A02YYUW and Pololu 2810 → LOLIN32 Lite
 
-| A02YYUW | Connection |
-|---|---|
-| VCC | switched 3.3 V through AO3401A / high-side switch |
-| GND | GND |
-| TX | GPIO16 |
-| RX | leave unconnected / floating |
-
-### Sensor power switch
-
-A **P-channel AO3401A MOSFET used as a high-side switch** is recommended:
+For automatic operation, leave the physical slide switch on the Pololu module in the **OFF** position. The ESP32 then controls the sensor using the module's `ON` input.
 
 ```text
-LOLIN32 Lite 3.3 V ----+--------- Source  AO3401A
-                       |
-                      100k
-                       |
-GPIO17 ----------------+--------- Gate
-                                  Drain -------- A02YYUW VCC
-
-LOLIN32 Lite GND ------------------------------ A02YYUW GND
-A02YYUW TX ------------------------------------ GPIO16
-A02YYUW RX ------------------------------------ not connected
+LOLIN32 3.3 V -------- VIN   Pololu 2810
+LOLIN32 GND   -------- GND   Pololu 2810
+GPIO17        -------- ON    Pololu 2810
+Pololu VOUT   -------- VCC   A02YYUW
+A02YYUW GND   -------- GND
+A02YYUW TX    -------- GPIO16
+A02YYUW RX    -------- leave unconnected
 ```
 
 This gives the following behavior:
 
-- **GPIO17 LOW:** A02YYUW powered on
-- **GPIO17 HIGH:** A02YYUW powered off
-- during deep sleep, the **100 kΩ pull-up** keeps the gate at 3.3 V and therefore keeps the sensor off
-
-A ready-made **low-voltage high-side MOSFET/load-switch module** can be used instead. It must operate at approximately **3.3 V supply voltage** and accept a **3.3 V GPIO control signal**. One suitable example is the **Pololu Mini MOSFET Slide Switch with Reverse Voltage Protection, LV**, which operates from 2 V and can be controlled from a microcontroller output.
+- **GPIO17 HIGH:** A02YYUW powered on
+- **GPIO17 LOW:** A02YYUW powered off
+- during deep sleep the A02YYUW remains unpowered
 
 The current wiring is also documented in [`fritzing/README.md`](fritzing/README.md).
 
