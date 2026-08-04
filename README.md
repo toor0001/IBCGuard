@@ -197,6 +197,10 @@ Current files:
 
 These files should therefore currently be treated as **prototype files**.
 
+<p align="center">
+  <img src="images/zeichnung.png" alt="IBCGuard Explosionszeichnung" width="90%">
+</p>
+
 ## Battery and safety
 
 A suitable 3.7 V 18650 Li-Ion cell can be used as long as it is in good condition. Do not use damaged, swollen or overheated cells.
