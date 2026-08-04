@@ -199,6 +199,10 @@ Vorhandene Dateien:
 
 Die vorhandenen Dateien sind deshalb aktuell als **Prototypen** zu betrachten.
 
+<p align="center">
+  <img src="images/zeichnung.png" alt="IBCGuard Explosionszeichnung" width="90%">
+</p>
+
 ## Akku und Sicherheit
 
 Eine geeignete 3,7-V-18650-Li-Ion-Zelle kann verwendet werden, sofern sie in gutem Zustand ist. Keine beschädigten, aufgeblähten oder überhitzten Zellen verwenden.
