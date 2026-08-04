@@ -11,8 +11,10 @@ A battery-powered, contactless level sensor for a **1,000 L IBC rainwater tank**
 > **Project status:** Work in progress. The project has been migrated from the VL53L0X to the A02YYUW. The ESPHome configuration and wiring documentation have already been updated; the enclosure/sensor mount may still need mechanical changes for the A02YYUW.
 
 <p align="center">
-  <img src="images/ibc1.jpeg" alt="IBCLEVEL enclosure" width="48%">
-  <img src="images/ibc2.jpeg" alt="IBCLEVEL enclosure interior" width="48%">
+  <img src="images/ibc1.jpeg" alt="IBCLEVEL enclosure" width="80%">
+</p>
+<p align="center">
+  <img src="images/ibc2.jpeg" alt="IBCLEVEL enclosure interior" width="80%">
 </p>
 
 ## Quick links
