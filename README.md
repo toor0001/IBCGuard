@@ -205,7 +205,7 @@ Protect the electronics and battery from rain, condensation and other environmen
 
 ## Support
 
-<a href="https://paypal.me/toor0001"><img src="assets/paypal-support-en.svg" alt="Buy me a coffee via PayPal" width="430"></a>
+<a href="https://paypal.me/toor0001/5"><img src="assets/paypal-support-en.svg" alt="Buy me a coffee via PayPal" width="430"></a>
 
 ## Contributing
 
