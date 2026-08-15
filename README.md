@@ -8,7 +8,7 @@
 
 A battery-powered, contactless level sensor for a **1,000 L IBC rainwater tank**, based on a **LOLIN32 Lite (ESP32)**, a waterproof **DFRobot A02YYUW ultrasonic sensor**, ESPHome and Home Assistant.
 
-> **Project status:** Work in progress. The project has been migrated from the VL53L0X to the A02YYUW. The ESPHome configuration and wiring documentation have already been updated; the enclosure/sensor mount may still need mechanical changes for the A02YYUW.
+> **Project status:** This project is currently **on hold due to lack of time**. The repository remains available as a reference, but active development is paused for now.
 
 <p align="center">
   <img src="images/ibc1.jpeg" alt="IBCLEVEL enclosure" width="80%">
