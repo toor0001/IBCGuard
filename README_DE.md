@@ -8,7 +8,7 @@
 
 Ein batteriebetriebener, berührungsloser Füllstandssensor für einen **1.000-Liter-IBC-Regenwassertank** auf Basis eines **LOLIN32 Lite (ESP32)**, eines wasserdichten **DFRobot A02YYUW Ultraschallsensors**, ESPHome und Home Assistant.
 
-> **Projektstatus:** In Entwicklung. Das Projekt wurde vom VL53L0X auf den A02YYUW umgestellt. ESPHome-Konfiguration und Verdrahtungsdokumentation sind bereits angepasst; das Gehäuse bzw. die Sensoraufnahme muss für den A02YYUW gegebenenfalls noch mechanisch angepasst werden.
+> **Projektstatus:** Dieses Projekt liegt aus **Zeitgründen derzeit auf Eis**. Das Repository bleibt als Referenz verfügbar, die aktive Weiterentwicklung ist vorerst pausiert.
 
 <p align="center">
   <img src="images/ibc1.jpeg" alt="IBCLEVEL-Gehäuse" width="80%">
